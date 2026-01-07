@@ -3,6 +3,7 @@
 body {
 	display: grid;
 	grid-template-columns: [full-start] 1fr [main-start] minmax(0, 72ch) [main-end] 1fr [full-end];
+	padding-inline: var(--sm-rem);
 }
 
 main, header, footer {
