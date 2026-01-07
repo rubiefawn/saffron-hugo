@@ -1,7 +1,6 @@
 /* Override this file with your own styles! */
 
 body {
-	height: 100dvh;
 	display: grid;
 	grid-template-columns: [full-start] 1fr [main-start] minmax(0, 72ch) [main-end] 1fr [full-end];
 }
