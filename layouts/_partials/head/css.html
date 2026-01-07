@@ -25,6 +25,16 @@
 
 	/* Fix missing horizontal scrollbar on iOS, see https://github.com/gohugoio/hugo/issues/7326 */
 	.highlight :where(div, pre) { overflow-x: auto }
+
+	/* Styles for self-linking heading shortcodes */
+	:where(h1, h2, h3, h4, h5, h6) > a {
+		text-decoration: none;
+		color: light-dark(var(--col-mono-zs), var(--col-mono-zl));
+	}
+
+	:where(h1, h2, h3, h4, h5, h6) > a:hover {
+		text-decoration: underline;
+	}
 </style>
 
 {{- with resources.Get "css/main.css" }}
