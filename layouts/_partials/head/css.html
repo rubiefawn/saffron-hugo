@@ -1,9 +1,38 @@
+{{- with resources.Get "saffron/src/saffron.scss" | toCSS (dict
+	"enableSourceMap" (hugo.IsDevelopment)
+	"outputStyle" (cond hugo.IsDevelopment "expanded" "compressed")
+	"targetPath" "css/saffron.css"
+	"transpiler" "dartsass"
+	"vars" site.Params.styles
+)}}
+	{{- if hugo.IsDevelopment }}
+		<link rel="stylesheet" href="{{ .RelPermalink }}">
+	{{- else }}
+		{{- with . | minify | fingerprint }}
+			<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+		{{- end }}
+	{{- end }}
+{{- end }}
+
+<style>
+	/* Fixes iOS font sizing anomaly, see https://stackoverflow.com/questions/38346494/why-is-flex-affecting-font-size-on-ios */
+	code {
+		text-size-adjust: 100%;
+		-ms-text-size-adjust: 100%;
+		-moz-text-size-adjust: 100%;
+		-webkit-text-size-adjust: 100%;
+	}
+
+	/* Fix missing horizontal scrollbar on iOS, see https://github.com/gohugoio/hugo/issues/7326 */
+	.highlight :where(div, pre) { overflow-x: auto }
+</style>
+
 {{- with resources.Get "css/main.css" }}
-  {{- if hugo.IsDevelopment }}
-    <link rel="stylesheet" href="{{ .RelPermalink }}">
-  {{- else }}
-    {{- with . | minify | fingerprint }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
-    {{- end }}
-  {{- end }}
+	{{- if hugo.IsDevelopment }}
+		<link rel="stylesheet" href="{{ .RelPermalink }}">
+	{{- else }}
+		{{- with . | minify | fingerprint }}
+			<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+		{{- end }}
+	{{- end }}
 {{- end }}
